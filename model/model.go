@@ -84,10 +84,10 @@ func GetExcel(c *gin.Context) {
 	for _, v := range res {
 		row = sheet.AddRow()
 		row.WriteStruct(&PurchaseInfo{v.User, v.Company, v.Tel, v.PurchaseNum, v.PurchaseTime}, 5)
-		err = file.Save(tmpfile)
-		if err != nil {
-			fmt.Printf(err.Error())
-		}
+	}
+
+	if err = file.Save(tmpfile); err != nil {
+		fmt.Printf(err.Error())
 	}
 
 	f, err := os.Open(tmpfile)
