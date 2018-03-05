@@ -1,0 +1,53 @@
+﻿* {
+	margin:0 0;
+	padding: 0 0;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	width: 108rem;
+	font-size: 1.6rem;
+	font-family: Arial, sans-serif;
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;	
+}
+
+label {
+	display: inline-block;
+	height: 2rem;
+	width: 12rem;
+	line-height: 2rem;
+}
+input {
+	display: inline-block;
+	outline:none;
+	height: 2rem;
+	width: 12rem;
+}
+button {
+	height: 2.2rem;
+	width: 8rem;
+	margin-left: 3rem;
+}
+#download {
+	height: 2.5rem;
+	width: 12rem;
+}
+
+
+
+
+
+  
+
+   
+  
+  
+
+  

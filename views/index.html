@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>采购录入页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link href="/assets/css/main.css" rel="stylesheet" />
+</head>
+<body>
+  <center>
+    <form action="/add" method="POST">
+    <div>
+        <label for="user">请输入你的信息</label>
+        <br>
+        <br>
+        <label for="user">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+        <input type="text" name="user" id="user" placeholder="请输入名字" required>
+        <br/>
+        <br/>
+        <label for="company">工作单位</label>
+        <input type="text" name="company" id="company" placeholder="请输入工作单位" required>
+        <br/>
+        <br/>
+        <label for="tel">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</label>
+        <input type="text" name="tel" id="tel" placeholder="请输入电话" required>
+        <br/>
+        <br/>
+        <label for="purchase_num">采购数目</label>
+        <input type="number" name="purchase_num" id="purchase_num" placeholder="请输入采购数目" required>
+        <br/> 
+        <br/>
+        <label for="purchase_time">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期</label>
+        <input type="date" name="purchase_time" id="purchase_time" placeholder="请输入采购日期" required>
+        <br>
+        <br>
+        <button type="submit" name="" id="">提交</button>
+        <button type="reset" name="" id="">重置</button>
+        <br>
+        <br>
+    </div>
+    </form>
+    <button name="download" id="download" value="导出excel">下载所有记录</button>
+</center>
+<script src="/assets/js/common.js"></script> 
+</body>
+</html>
