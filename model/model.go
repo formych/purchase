@@ -42,7 +42,7 @@ func Add(c *gin.Context) {
 	}
 	fmt.Println(p)
 	fmt.Println(c.Param("purchase_time"))
-	tnow := time.Now().Format("2016-01-02 15:04:05")
+	tnow := time.Now().Format("2006-01-02 15:04:05")
 	r := &dao.PurchaseInfo{
 		User:         p.User,
 		Company:      p.Company,
