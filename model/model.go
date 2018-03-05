@@ -9,10 +9,13 @@ import (
 	"time"
 
 	"github.com/formych/purchase/dao"
+
+	"github.com/formych/util"
 	"github.com/gin-gonic/gin"
 	"github.com/tealeg/xlsx"
 )
 
+// PurchaseInfo 对应页面的字段
 type PurchaseInfo struct {
 	User        string `form:"user" json:"user"`
 	Company     string `form:"company" json:"company"`
@@ -21,11 +24,14 @@ type PurchaseInfo struct {
 	PuchaseTime string `form:"purchase_time" json:"purchase_time"`
 }
 
+// Index ...
 func Index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"title": "Index",
 	})
 }
+
+// Add record to db
 func Add(c *gin.Context) {
 	p := &PurchaseInfo{}
 	c.Param("purchase_time")
@@ -54,12 +60,13 @@ func Add(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": "success"})
 }
 
+// GetExcel download excel file to user
 func GetExcel(c *gin.Context) {
 	var file *xlsx.File
 	var sheet *xlsx.Sheet
 	var row *xlsx.Row
 	var err error
-	var tmpfile = "./excel/tmp.xlsx"
+	var tmpfile = "./excel/" + util.NonceStr(15) + ".xlsx"
 
 	file = xlsx.NewFile()
 	sheet, err = file.AddSheet("Sheet1")
@@ -83,12 +90,12 @@ func GetExcel(c *gin.Context) {
 		}
 	}
 
-	file1, err := os.Open(tmpfile)
-	defer file1.Close()
+	f, err := os.Open(tmpfile)
+	defer f.Close()
 	if err != nil {
 		fmt.Println(err)
 	}
-	data, err := ioutil.ReadAll(file1)
+	data, err := ioutil.ReadAll(f)
 	if err != nil {
 		fmt.Printf(err.Error())
 	}
