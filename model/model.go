@@ -80,15 +80,15 @@ func GetExcel(c *gin.Context) {
 	}
 	row = sheet.AddRow()
 	row.WriteSlice(&[]string{"用户名", "公司", "电话", "采购数量", "采购时间"}, 5)
-	defer os.Remove(tmpfile)
 	for _, v := range res {
 		row = sheet.AddRow()
 		row.WriteStruct(&PurchaseInfo{v.User, v.Company, v.Tel, v.PurchaseNum, v.PurchaseTime}, 5)
 	}
 
 	if err = file.Save(tmpfile); err != nil {
-		fmt.Printf(err.Error())
+		fmt.Println(err.Error())
 	}
+	defer os.Remove(tmpfile)
 
 	f, err := os.Open(tmpfile)
 	defer f.Close()
