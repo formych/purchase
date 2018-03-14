@@ -1,52 +1,52 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>采购录入页</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>采购录入页</title>
     <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
     <link href="/assets/css/main.css" rel="stylesheet" />
 
 </head>
 <body>
   <center>
-    <div><img src="photo1.jpg" style="width: 200px; height: 50px;" /></div>
-    <div><img src="photo2.jpg" style="width: 200px; height: 50px;" /></div>
+    <div><img src="/assets/images/photo1.jpg" style="width: 200px; height: 50px;" /></div>
+    <div><img src="/assets/images/photo2.jpg" style="width: 200px; height: 50px;" /></div>
     <p style="color: black;" for="user">浙江衡量科技有限公司</p>
     <form action="/add" method="POST">
         <p style="color: red;" for="user">请输入你的信息</p>
         <div style="position:relative;width:250px;border-bottom: 0.5px solid #BEBEBE;">
-            <label for="user"><img src="pic1.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+            <label for="user"><img src="/assets/images/pic1.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label>
             <input style="border-style: none;text-align: right;" type="text" name="user" id="user" placeholder="请输入名字" required>
         </div>
         <br/>
         <div style="position:relative;width:250px;border-bottom: 0.5px solid #BEBEBE;">
 
-        <label for="company"><img src="pic2.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;工作单位</label>
+        <label for="company"><img src="/assets/images/pic2.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;工作单位</label>
         <input style="border-style: none;text-align: right;" type="text" name="company" id="company" placeholder="请输入工作单位" required>
         </div>
         <br/>
         <div style="position:relative;width:250px;border-bottom: 0.5px solid #BEBEBE;">
-        <label for="tel"><img src="pic3.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</label>
+        <label for="tel"><img src="/assets/images/pic3.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</label>
         <input style="border-style: none;text-align: right;" type="text" name="tel" id="tel" placeholder="请输入电话" required>
         </div>
         <br/>
         <div style="position:relative;width:250px;border-bottom: 0.5px solid #BEBEBE;">
-        <label for="purchase_num"><img src="pic4.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;采购数目</label>
+        <label for="purchase_num"><img src="/assets/images/pic4.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;采购数目</label>
         <input style="border-style: none;text-align: right;" type="number" name="purchase_num" id="purchase_num" placeholder="请输入采购数目" required>
         </div>
         <br/> 
         <div style="position:relative;width:250px;border-bottom: 0.5px solid #BEBEBE;">
-        <label for="purchase_time"><img src="pic5.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期</label>
+        <label for="purchase_time"><img src="/assets/images/pic5.PNG" style="width: 25px; height: 20px;" align="left" />&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期</label>
         <input style="border-style: none;text-align: right;" type="date" name="purchase_time" id="purchase_time" placeholder="请输入采购日期" required>
         </div>
         <br>
-        <button type="submit" name="" id="">提交</button>
-        <button type="reset" name="" id="">重置</button>
+        <button style="background-color: red;width:230px;height:30px;font-size:15px;color: white;" type="submit" name="" id="">点击提交</button>
         <br>
         <br>
     </div>
     </form>
-    <button name="download" id="download" value="导出excel">下载所有记录</button>
+
 </center>
 <script src="/assets/js/common.js"></script> 
 </body>
