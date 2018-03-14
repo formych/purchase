@@ -3,6 +3,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/formych/util"
+  packages = ["."]
+  revision = "bf0f4204c13e763d6cd8ded5d853171e391ad215"
+
+[[projects]]
+  branch = "master"
   name = "github.com/gin-contrib/sse"
   packages = ["."]
   revision = "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae"
@@ -68,6 +74,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "380293d10024c648dcefed23b5157b7bc4f85223cfaaa43b666271a95a40c586"
+  inputs-digest = "5f6527e36275a3409ecb83d54d2417c767521a25bcbf5d510ff59ad24c0e3065"
   solver-name = "gps-cdcl"
   solver-version = 1
