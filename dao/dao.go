@@ -8,14 +8,32 @@ import (
 	_ "github.com/mattn/go-sqlite3" // 为了调用sql.Register()
 )
 
+// DB 全局的DB
 var DB *sql.DB
 
-func init() {
+// 如果有框架的话，可以放在框架里面
+func Init() {
+	DB = NewDB()
+}
+
+// NewDB 建立一个全局的db连接
+func NewDB() (db *sql.DB) {
 	db, err := sql.Open("sqlite3", "./db/purchase.db")
 	if err != nil {
 		log.Fatal(err)
 	}
-	DB = db
+	return
+}
+
+// CloseDB 关闭数据库连接
+func CloseDB(db *sql.DB) (err error) {
+	err = db.Close()
+	if err != nil {
+		log.Printf("Close DB failed, err:[%v]\n", err)
+	} else {
+		log.Printf("Close DB success\n")
+	}
+	return
 }
 
 // PurchaseInfo 记录采购信息

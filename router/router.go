@@ -16,4 +16,5 @@ func init() {
 	Router.GET("/", model.Index)
 	Router.GET("/excel", model.GetExcel)
 	Router.POST("/add", model.Add)
+	Router.PATCH("/status", model.Status)
 }

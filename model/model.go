@@ -57,7 +57,8 @@ func Add(c *gin.Context) {
 		c.JSON(http.StatusBadGateway, gin.H{"status": "failed"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"status": "success"})
+	// c.JSON(http.StatusOK, gin.H{"status": "success"})
+	c.HTML(http.StatusOK, "status.html", gin.H{})
 }
 
 // GetExcel download excel file to user
@@ -101,4 +102,8 @@ func GetExcel(c *gin.Context) {
 	}
 	c.Header("Content-Disposition", "attachment; filename=purchaseinfo.xlsx")
 	c.Data(200, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", data)
+}
+
+func Status(c *gin.Context) {
+
 }

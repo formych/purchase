@@ -1,4 +1,5 @@
-﻿* {
+@charset "utf-8";
+* {
 	margin:0 0;
 	padding: 0 0;
 }
@@ -12,27 +13,64 @@ body {
 	font-family: Arial, sans-serif;
 	margin: 0 auto;
 }
+center {
+	margin-top: 2rem;
+}
 
 a {
 	text-decoration: none;	
 }
 
+h2{
+	height: 4rem;
+	line-height: 4rem;
+	color: black;
+}
+
+.info {
+	height: 3rem;
+	line-height: 3rem;
+	color:red;
+}
+
+.line-wrap {
+	width: 25rem;
+	height: 3rem;
+	line-height: 3rem;
+	border-bottom: 0.01rem solid #BEBEBE;
+}
+.big-img {
+	width: 20rem;
+	height: 5rem;
+}
+.small-img {
+	width: 2.5rem;
+	max-width: 2.5rem;
+	height: 2rem;
+	line-height: 2rem;
+}
 label {
 	display: inline-block;
 	height: 2rem;
-	width: 12rem;
 	line-height: 2rem;
+	text-align: left;
 }
 input {
 	display: inline-block;
-	outline:none;
-	height: 2rem;
-	width: 12rem;
+	outline: none;
+	height: 2.5rem;
+	width: 15rem;
+	font-size: 1.7rem;
+	border-style: none;
+	text-align: right;
 }
 button {
-	height: 2.2rem;
-	width: 8rem;
-	margin-left: 3rem;
+	width:25rem;
+	height:3.5rem;
+	background-color: red;
+	font-size: 2rem;
+	color: white;
+	border-radius: 0.33rem;
 }
 #download {
 	height: 2.5rem;

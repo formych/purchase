@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	// 暂时使用显式关闭数据库连接
-	defer dao.DB.Close()
+	dao.Init()
 	router.Router.Run(":8080")
 }
