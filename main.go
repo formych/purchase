@@ -7,5 +7,6 @@ import (
 
 func main() {
 	dao.Init()
+	defer dao.DB.Close()
 	router.Router.Run(":8080")
 }

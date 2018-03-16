@@ -44,16 +44,17 @@ h2{
 	height: 5rem;
 }
 .small-img {
-	width: 2.5rem;
 	max-width: 2.5rem;
-	height: 2rem;
+	height: auto;
 	line-height: 2rem;
+	float: left;
 }
 label {
-	display: inline-block;
+	display: block;
 	height: 2rem;
 	line-height: 2rem;
 	text-align: left;
+	float: left;
 }
 input {
 	display: inline-block;
