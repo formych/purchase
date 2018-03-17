@@ -1,0 +1,37 @@
+{{template "head"}}
+<body>
+    <div class="container ">
+		<div class="panel panel-default">
+	          <div class="panel-heading">采购记录<button id="download">导出excel</button></div>
+	  		<!-- <div class="panel-body">
+	    		<p>导出，查询</p>
+	    	</div> -->
+			<div class="table-response">
+				<table class="table table-bodered table-condensed table-hover" id="table">
+					<thead>
+						<tr>
+							<td>姓名</td>
+							<td>公司</td>
+							<td>电话</td>
+							<td>采购数量</td>
+							<td>日期</td>
+						</tr>
+					</thead>
+					<tbody>
+	                    {{range .Rows}}
+	                    <tr>
+	                        <td>{{.User}}</td>
+	                        <td>{{.Company}}</td>
+	                        <td>{{.Tel}}</td>
+	                        <td>{{.PurchaseNum}}</td>
+	                        <td>{{.PurchaseTime}}</td>
+	                    </tr>
+	                    {{end}}	
+					</tbody>
+				</table>
+			</div>
+	    </div>
+    </div>
+    <script src="/assets/js/common.js"></script>
+</body>
+</html>

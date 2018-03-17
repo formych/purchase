@@ -75,17 +75,18 @@ button {
 }
 #download {
 	height: 2.5rem;
-	width: 12rem;
+	width: 10rem;
+	line-height: 2.5rem;
+	background-color:#fff;
+	color: black;
+	border-radius: 0.33rem;
+	float: right;
+	margin-right: 5rem;
+	outline: none;
 }
-
-
-
-
-
-  
-
-   
-  
-  
-
-  
+#table {
+	margin-bottom: 0;
+}
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}

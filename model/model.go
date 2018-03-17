@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -40,8 +39,7 @@ func Add(c *gin.Context) {
 		log.Println(err)
 		return
 	}
-	fmt.Println(p)
-	fmt.Println(c.Param("purchase_time"))
+	log.Println(c.Param("purchase_time"))
 	tnow := time.Now().Format("2006-01-02 15:04:05")
 	r := &dao.PurchaseInfo{
 		User:         p.User,
@@ -54,11 +52,10 @@ func Add(c *gin.Context) {
 	}
 	err := dao.PurchaseInfoDao.Add(r)
 	if err != nil {
-		c.JSON(http.StatusBadGateway, gin.H{"status": "failed"})
+		c.String(http.StatusBadGateway, "添加数据失败")
 		return
 	}
-	// c.JSON(http.StatusOK, gin.H{"status": "success"})
-	c.HTML(http.StatusOK, "status.html", gin.H{})
+	c.Redirect(302, "status")
 }
 
 // GetExcel download excel file to user
@@ -76,34 +73,50 @@ func GetExcel(c *gin.Context) {
 	}
 	res, err := dao.PurchaseInfoDao.Get()
 	if err != nil {
-		log.Println("Get excel record failed")
+		log.Println("DB get records failed")
 		return
 	}
 	row = sheet.AddRow()
-	row.WriteSlice(&[]string{"用户名", "公司", "电话", "采购数量", "采购时间"}, 5)
+	row.WriteSlice(&[]string{"姓名", "公司", "电话", "采购数量", "采购时间"}, 5)
 	for _, v := range res {
 		row = sheet.AddRow()
 		row.WriteStruct(&PurchaseInfo{v.User, v.Company, v.Tel, v.PurchaseNum, v.PurchaseTime}, 5)
 	}
 
 	if err = file.Save(tmpfile); err != nil {
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 	}
 	defer os.Remove(tmpfile)
 
 	f, err := os.Open(tmpfile)
 	defer f.Close()
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	data, err := ioutil.ReadAll(f)
 	if err != nil {
-		fmt.Printf(err.Error())
+		log.Printf(err.Error())
+		return
 	}
 	c.Header("Content-Disposition", "attachment; filename=purchaseinfo.xlsx")
 	c.Data(200, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", data)
 }
 
-func Status(c *gin.Context) {
+// List show all records
+func List(c *gin.Context) {
+	// exeSQL := "SELECT * FROM %s "
+	res, err := dao.PurchaseInfoDao.Get()
+	if err != nil {
+		log.Printf("DB get record failed, err: [%v]", err)
+		c.String(http.StatusBadGateway, "获取数据失败")
+		return
+	}
+	c.HTML(http.StatusOK, "list.html", gin.H{
+		"Rows": res,
+	})
+}
 
+// Status 默认成功页面
+func Status(c *gin.Context) {
+	c.HTML(http.StatusOK, "status.html", gin.H{})
 }
