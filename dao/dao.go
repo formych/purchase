@@ -66,31 +66,55 @@ func (p *PurchaseInfoDAO) Add(r *PurchaseInfo) (err error) {
 	return
 }
 
-func (p *PurchaseInfoDAO) Get() (res []*PurchaseInfo, err error) {
-	sql := fmt.Sprintf("Select user, company, tel, purchase_num, purchase_time  from %s", p.tableName)
+func (p *PurchaseInfoDAO) Get(start, limit uint64) (res []*PurchaseInfo, err error) {
+	sql := fmt.Sprintf("SELECT * from %s LIMIT %d, %d", p.tableName, start, limit)
 	rows, err := DB.Query(sql)
 	if err != nil {
 		log.Printf("Get db rows failed, sql:[%s], err:[%v]\n", sql, err)
 		return
 	}
 	for rows.Next() {
-		var (
-			purchaseNum        int
-			user, company, tel string
-			purchaseTime       string
-		)
-		if err = rows.Scan(&user, &company, &tel, &purchaseNum, &purchaseTime); err != nil {
+		pInfo := &PurchaseInfo{}
+		if err = rows.Scan(&pInfo.ID, &pInfo.User, &pInfo.Company, &pInfo.Tel, &pInfo.PurchaseNum, &pInfo.PurchaseTime, &pInfo.CreatedTime, &pInfo.UpdatedTime); err != nil {
 			log.Printf("Scan rows failed, err:[%v]\n", err)
 			return
 		}
-		pInfo := &PurchaseInfo{
-			User:         user,
-			Company:      company,
-			Tel:          tel,
-			PurchaseNum:  purchaseNum,
-			PurchaseTime: purchaseTime,
+		res = append(res, pInfo)
+	}
+	rows.Close()
+	return
+}
+
+func (p *PurchaseInfoDAO) GetAll(start, limit int64) (res []*PurchaseInfo, err error) {
+	sql := fmt.Sprintf("SELECT * from %s", p.tableName)
+	rows, err := DB.Query(sql)
+	if err != nil {
+		log.Printf("Get db rows failed, sql:[%s], err:[%v]\n", sql, err)
+		return
+	}
+	for rows.Next() {
+		pInfo := &PurchaseInfo{}
+		if err = rows.Scan(&pInfo.ID, &pInfo.User, &pInfo.Company, &pInfo.Tel, &pInfo.PurchaseNum, &pInfo.PurchaseTime, &pInfo.CreatedTime, &pInfo.UpdatedTime); err != nil {
+			log.Printf("Scan rows failed, err:[%v]\n", err)
+			return
 		}
 		res = append(res, pInfo)
+	}
+	rows.Close()
+	return
+}
+
+func (p *PurchaseInfoDAO) Count() (total int64, err error) {
+	sql := fmt.Sprintf("SELECT COUNT(*) from %s", p.tableName)
+	rows, err := DB.Query(sql)
+	for rows.Next() {
+		err = rows.Scan(&total)
+		if err != nil {
+			log.Printf("Scan rows failed, err:[%v]\n", err)
+		}
+	}
+	if err != nil {
+		log.Printf("Count rows failed, err:[%v]", err)
 	}
 	rows.Close()
 	return

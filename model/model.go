@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/formych/purchase/dao"
@@ -71,7 +72,7 @@ func GetExcel(c *gin.Context) {
 	if err != nil {
 		log.Printf(err.Error())
 	}
-	res, err := dao.PurchaseInfoDao.Get()
+	res, err := dao.PurchaseInfoDao.Get(0, 0)
 	if err != nil {
 		log.Println("DB get records failed")
 		return
@@ -104,15 +105,35 @@ func GetExcel(c *gin.Context) {
 
 // List show all records
 func List(c *gin.Context) {
-	// exeSQL := "SELECT * FROM %s "
-	res, err := dao.PurchaseInfoDao.Get()
+	page := c.DefaultQuery("page", "1")
+	pageTotal := c.DefaultQuery("page_total", "20")
+	pageNum, _ := strconv.ParseUint(page, 10, 64)
+	pageTotalNum, _ := strconv.ParseUint(pageTotal, 10, 64)
+	if pageNum == 0 {
+		pageNum = 1
+	}
+	if pageTotalNum == 0 {
+		pageTotalNum = 20
+	}
+
+	start := (pageNum - 1) * pageTotalNum
+	resultTotal, err := dao.PurchaseInfoDao.Count()
+	if err != nil {
+		resultTotal = 0
+	}
+	res, err := dao.PurchaseInfoDao.Get(start, pageTotalNum)
 	if err != nil {
 		log.Printf("DB get record failed, err: [%v]", err)
 		c.String(http.StatusBadGateway, "获取数据失败")
 		return
 	}
+	if len(res) == 0 {
+		res = []*dao.PurchaseInfo{}
+	}
 	c.HTML(http.StatusOK, "list.html", gin.H{
-		"Rows": res,
+		"Rows":      res,
+		"PageTotal": pageTotalNum,
+		"PageNum":   uint64(resultTotal) / pageTotalNum,
 	})
 }
 

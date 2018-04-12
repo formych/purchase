@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/formych/purchase/api"
 	"github.com/formych/purchase/model"
 	"github.com/gin-gonic/gin"
 )
@@ -18,4 +19,7 @@ func init() {
 	Router.GET("/list", model.List)
 	Router.GET("/status", model.Status)
 	Router.POST("/add", model.Add)
+
+	group := Router.Group("/v1")
+	group.GET("/list", api.List)
 }
