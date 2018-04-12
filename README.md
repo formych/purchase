@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/formych/purchase.svg?branch=master)](https://travis-ci.org/formych/purchase)
 ## QuickStart：
 ### go get github.com/formych/purchase
 ### cd $GOPATH/src/github.com/formych/purchase
